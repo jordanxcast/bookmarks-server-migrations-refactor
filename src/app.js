@@ -4,41 +4,25 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helemt = require('helmet');
 const { NODE_ENV } = require('./config');
-const bookmarkRouter = require('./bookmarks/bookmarks');
+const validateBearerToken = require('./validate-bearer-token');
+const errorHandler = require('./error-handler');
+const bookmarkRouter = require('./bookmarks/bookmarksRouter');
 
 const app = express();
-
 
 const morganOption = NODE_ENV === 'production' ? 'tiny' : 'common';
 
 app.use(morgan(morganOption));
 app.use(cors());
 app.use(helemt());
-app.use(express.json())
+app.use(validateBearerToken);
 
-app.use(function validateBearerToken(req, res, next) {
-  const apiToken = process.env.API_TOKEN
-  const authToken = req.get('Authorization')
+app.use(bookmarkRouter);
 
-  if (!authToken || authToken.split(' ')[1] !== apiToken) {
-    logger.error(`Unauthorized request to path: ${req.path}`);
-    return res.status(401).json({ error: 'Unauthorized request' })
-  }
-  // move to the next middleware
-  next()
-})
-
-app.use(bookmarkRouter)
-
-app.use((error, req, res, next)=>{
-  let response;
-  if(NODE_ENV === 'production'){
-    response = { error: 'Internal Service Error' }
-  }
-  else {
-    response = {message: error.message, error}
-  }
-  res.status(500).json(response);
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
 });
+
+app.use(errorHandler);
 
 module.exports = app;

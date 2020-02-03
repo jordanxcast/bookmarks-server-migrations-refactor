@@ -34,3 +34,42 @@
 {"message":"Bookmark with id 4f5f1098-e9fb-4610-99ab-648d4f8395e2 created","level":"info"}
 {"message":"Bookmark with id bfe5703d-5b81-45a8-91ca-7ba69e15744a created","level":"info"}
 {"message":"Bookmark with id bfe5703d-5b81-45a8-91ca-7ba69e15744a deleted.","level":"info"}
+{"message":"Unauthorized request to path: /","level":"error"}
+{"message":"Unauthorized request to path: /","level":"error"}
+{"message":"Unauthorized request to path: /","level":"error"}
+{"message":"Unauthorized request to path: /","level":"error"}
+{"message":"Bookmark with id 2 not found","level":"error"}
+{"message":"Bookmark with id 123456 not found","level":"error"}
+{"message":"Bookmark with id 2 not found","level":"error"}
+{"message":"Bookmark with id 123456 not found","level":"error"}
+{"message":"Bookmark with id 2 not found","level":"error"}
+{"message":"Bookmark with id 0408a003-7845-44e7-87a2-f302a6f57d96 created","level":"info"}
+{"message":"Bookmark with id 123456 not found","level":"error"}
+{"message":"Bookmark with id 2 not found","level":"error"}
+{"message":"Bookmark with id 13e65ea6-d428-4d8b-98a8-ccfe24cc1aaf created","level":"info"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks/123456","level":"error"}
+{"message":"Undefined binding(s) detected when compiling FIRST. Undefined column(s): [id] query: select * from \"bookmarks\" where \"id\" = ? limit ?","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks/2","level":"error"}
+{"message":"Undefined binding(s) detected when compiling FIRST. Undefined column(s): [id] query: select * from \"bookmarks\" where \"id\" = ? limit ?","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"insert into \"bookmarks\" (\"description\", \"id\", \"rating\", \"title\", \"url\") values ($1, $2, $3, $4, $5) returning * - invalid input syntax for type integer: \"800812b9-0415-4a06-b41b-976d8903a8f8\"","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks/2","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks/2","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks/123456","level":"error"}
+{"message":"Undefined binding(s) detected when compiling FIRST. Undefined column(s): [id] query: select * from \"bookmarks\" where \"id\" = ? limit ?","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks/2","level":"error"}
+{"message":"Undefined binding(s) detected when compiling FIRST. Undefined column(s): [id] query: select * from \"bookmarks\" where \"id\" = ? limit ?","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks/123","level":"error"}
+{"message":"Undefined binding(s) detected when compiling FIRST. Undefined column(s): [id] query: select * from \"bookmarks\" where \"id\" = ? limit ?","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks/2","level":"error"}
+{"message":"Undefined binding(s) detected when compiling FIRST. Undefined column(s): [id] query: select * from \"bookmarks\" where \"id\" = ? limit ?","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"insert into \"bookmarks\" (\"description\", \"id\", \"rating\", \"title\", \"url\") values ($1, $2, $3, $4, $5) returning * - invalid input syntax for type integer: \"d66b411f-26e9-4141-8fea-6dd964733f9c\"","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
