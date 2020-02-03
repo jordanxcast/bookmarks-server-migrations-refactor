@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 const knex = require('knex');
 const app = require('../src/app');
 const { makeBookmarksArray, makeMaliciousBookmark } = require('./bookmarks.fixtures');
@@ -56,7 +57,7 @@ describe('Bookmarks Endpoints', () => {
     });
   });
 
-  describe.only('GET /bookmarks', () => {
+  describe('GET /bookmarks', () => {
     context('Given no bookmarks in the database', () => {
       it('responds with 200 and an empty array', () => {
         return supertest(app)
@@ -197,11 +198,62 @@ describe('Bookmarks Endpoints', () => {
     });
   });
 
-  describe('POST /bookmarks', () => {
+  describe.only('POST /bookmarks', () => {
+    
+    const requiredFields = ['title', 'url', 'rating'];
+
+    requiredFields.forEach(field => {
+      const newTestBookmark = {
+        'title': 'A test title',
+        'url': 'https://www.testsite.com',
+        'rating': 3
+      };
+
+      it('Responds with 400 missing [field] ', () => {
+        delete newTestBookmark[field];
+        return supertest(app)
+          .post('/bookmarks')
+          .send(newTestBookmark)
+          .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+          .expect(400, {
+            error: {message: `${field} is required`}
+          });
+      }); 
+    });
+
+    it('Responds with "rating must be between 0 and 5" if rating is outside the range', () => {
+      const newBookmarkInvalidRating = {
+        'title': 'Parry Hotter',
+        'url': 'www.parryhotter.com',
+        'rating': 87
+      };
+
+      return supertest(app)
+        .post('/bookmarks')
+        .send(newBookmarkInvalidRating)
+        .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+        .expect(400, `'rating' must be a number between 0 and 5`);
+        
+    });
+
+    it(`Responds 'url' must be a valid url when given an invalid one`, () => {
+      const newBookmarkBadBadUrl = {
+        'title': 'A test title',
+        'url': 'nope.nope.com',
+        'rating': 3
+      };
+
+      supertest(app)
+        .post('/bookmarks')
+        .send(newBookmarkBadBadUrl)
+        .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+        .expect(400, `'url' must be a valid URL`);
+    });
+
     it('creates a bookmark, responding with 201 and the new bookmark', () => {
       const newBookmark = {
         title: 'Test new bookmarks',
-        url: 'www.zillow.com',
+        url: 'https://www.zillow.com',
         description: 'New bookmarks description',
         rating: 5
       };
@@ -226,5 +278,21 @@ describe('Bookmarks Endpoints', () => {
         );
 
     });
+
+    it('removes XSS evilness from response', () => {
+      const { maliciousBookmark, expectedBookmark } = makeMaliciousBookmark();
+      return supertest(app)
+        .post(`/bookmarks`)
+        .send(maliciousBookmark)
+        .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+        .expect(201)
+        .expect(res => {
+          expect(res.body.title).to.eql(expectedBookmark.title);
+          expect(res.body.description).to.eql(expectedBookmark.description);
+        });
+
+    });
+
+
   });
 });
