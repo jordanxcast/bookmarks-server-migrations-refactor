@@ -20,7 +20,7 @@ app.use(validateBearerToken);
 app.use(bookmarkRouter);
 
 app.get('/', (req, res) => {
-  res.send('Hello, world!');
+  res.send('Hello, world out there!');
 });
 
 app.use(errorHandler);
